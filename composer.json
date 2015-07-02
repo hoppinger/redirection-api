@@ -1,0 +1,13 @@
+{
+    "name": "hoppinger/redirection-api",
+    "description": "This WordPress plugin provides API endpoints for the popular Redirection plugin.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastiaan de Geus",
+            "email": "sebastiaan@hoppinger.com"
+        }
+    ],
+    "require": {}
+}
