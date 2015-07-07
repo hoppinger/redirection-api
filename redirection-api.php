@@ -56,6 +56,13 @@ class Redirection_API {
    * @since 0.1.0
    */
   public function get_redirect( $id ) {
-    return Red_Item::get_by_id( $id );
+    $item = Red_Item::get_by_id($id);
+
+    $object = new StdClass;
+    $object->id = $item->get_id();
+    $object->from = $item->get_url();
+    $object->to = $item->get_action_data();
+
+    return $object;
   }
 }
