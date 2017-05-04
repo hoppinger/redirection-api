@@ -132,4 +132,37 @@ class Redirection_API {
 
     return $object;
   }
+
+  /**
+   * Store redirect
+   *
+   * @since 0.2.0
+   */
+  public function save_redirect( $request ) {
+    // For some reason, Red_Group is only included in `redirection_admin.php`, and not in the
+    // base file.
+    if ( ! class_exists( 'Red_Group' ) ) {
+      include_once plugin_dir_path( __DIR__ ) . 'redirection/models/group.php';
+    }
+
+    $params = $request->get_params();
+
+    $details = array(
+      'source'     => $params['from'],
+      'target'     => $params['to'],
+      'match'      => 'url',
+      'group_id'   => 1,
+      'red_action' => 'url',
+    );
+
+    $item = Red_Item::create( $details );
+
+    if ( $item instanceof WP_Error ) {
+      return $item;
+    }
+
+    $object = $this->prepare_redirect_for_response( $item );
+
+    return new WP_REST_Response( $object, 201 );
+  }
 }
